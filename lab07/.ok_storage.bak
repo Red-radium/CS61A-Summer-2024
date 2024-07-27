@@ -1,0 +1,5 @@
+'midsem_survey-correct', (0, 66)
+'Account-correct', (512, 66)
+'BankAccount-correct', (1024, 66)
+'Client-correct', (1536, 66)
+'FreeChecking-correct', (2048, 66)
