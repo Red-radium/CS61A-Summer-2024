@@ -1,20 +1,26 @@
-(define (up n)
-        (define (helper n result)
-            (if (zero? n) result
-                (helper
-                    (quotient n 10)
-                    (let ((first (remainder n 10)))
-                        (if (>= first (car result)) (list first result)
-                            (cons first result)
-                        )
-                    )
-                )
-            )
+(define (length s)
+    (define (helper s n)
+        (if (null? s) n
+            (helper (cdr s) (+ 1 n))
+    
         )
-        (helper
-          (quotient n 10)
-          (list (remainder n 10))
-        )
+    )
+    (helper s 0)
 )
 
-;   (expect (up 314152667899) (3 (1 4 (1 5 (2 6 (6 7 8 9 (9)))))))
+(define (runs s)
+    (if (null? s) nil
+        (let(p(next-run s)))
+        (cons (first p)(runs(rest p)))
+    )
+)
+
+(define (next-runs s)
+    (if (or (null? (cdr s)) (< (cdr (car s)) (car s)))
+        (pair (list (car s)) (cdr s))
+        (begin
+            (define p (next-runs (cdr s)))
+            (pair (cons (car s) (first p)) (rest p))
+        )
+    )
+)
